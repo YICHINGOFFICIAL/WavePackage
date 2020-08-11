@@ -113,10 +113,13 @@ open class YXWaveView: UIView {
         }
     }
 
+    deinit {
+        stop()
+    }
     /**
      Stop wave
     */
-    open func _stop(){
+    private func _stop(){
         if (timer != nil) {
             timer?.invalidate()
             timer = nil
@@ -133,7 +136,7 @@ open class YXWaveView: UIView {
     /**
      Wave animation
      */
-    @objc func wave() {
+    @objc private func wave() {
 
         if _starting {
             if _waveHeight < waveHeight {
@@ -228,25 +231,3 @@ class WaveLayer: CAShapeLayer {
         self.path = path
     }
 }
-
-
-@propertyWrapper
-struct RatioRegion{
-    var number: CGFloat
-    init() {
-        self.number = 0.5
-    }
-    var wrappedValue: CGFloat{
-        get { return number }
-        set {
-            if newValue > 1{
-                number = 1
-            }else if newValue < 0{
-                number = 0
-            }else{
-                number = newValue
-            }
-        }
-    }
-}
-
