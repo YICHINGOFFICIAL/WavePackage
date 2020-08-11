@@ -116,6 +116,7 @@ open class YXWaveView: UIView {
     deinit {
         stop()
     }
+    
     /**
      Stop wave
     */
